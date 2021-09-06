@@ -70,3 +70,29 @@ int * transponerMatrices(int *matriz, int filas, int columnas) {
     }
     return transpuesta;
 }
+
+int *multiplyMatrices(int *primerMatriz, int pFila, int pColumna, int *segundaMatriz, int sFila, int sColumna) {
+
+    if (pColumna == sFila) {
+        int aux;
+        int *result = (int*) malloc(pFila * sColumna * sizeof (int));
+        for (int i = 0; i < pFila; i++) {
+            for (int j = 0; j < sColumna; j++) {
+                aux = 0;
+                for (int x = 0; x < pColumna; x++) {
+                    aux += (*(primerMatriz + i * pColumna + x)) * (*(segundaMatriz + x * sColumna + j));
+                }
+                *(result + i * sColumna + j) = aux;
+            }
+        }
+        return result;
+    } else {
+        puts("Dimenciones no son correctas");
+        exit(0);
+    }
+}
+
+const char * integrantes() {
+    const char * grupo[] = {"LR19047,FT19004"};
+    return *grupo;
+}
