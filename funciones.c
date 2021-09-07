@@ -96,3 +96,75 @@ const char * integrantes() {
     const char * grupo[] = {"LR19047,FT19004"};
     return *grupo;
 }
+
+char * leer(char *Path) {
+   
+    FILE *archivoP;
+    archivoP = fopen(Path, "r");
+    
+    
+    if (archivoP == NULL) {
+        printf("Hubo un problema en abrir el archivo");
+    }
+    
+    int filas = 0;
+    int columnas = 0;
+    //Cuentas filas y columnas  del archivo
+    while (feof(archivoP) == 0) {
+        char letra = fgetc(archivoP);
+        if (letra == '\n') {
+            filas++;
+
+        } else if (filas == 0 && letra == 44) {
+            columnas++;
+
+        }
+    }
+    
+    filas++;
+    columnas++;
+
+
+
+    rewind(archivoP);
+    
+    char *matrizR = (char *) malloc(filas * columnas * sizeof (char));
+    
+    //static char matrizR[60][7];
+    char valor[300];
+    char *valorObtenido = "";
+    char *prueba;
+    int filasMuestra = 0;
+    int contador = 0;
+
+    void *alma; 
+    do {
+       
+
+        contador = 0;
+
+        fgets(valor, 300, archivoP);
+
+        prueba = valor;
+        //Obtenemos las demas columnas del strtok
+        while (contador < columnas) {
+            if (contador == 0) {
+                 
+                valorObtenido = strtok(valor, ", ");
+                 
+            }else{
+                 valorObtenido = strtok(NULL, ", ");
+            }
+            printf(" %s ",valorObtenido);
+            
+            //*(matrizR + filasMuestra * columnas + contador) = (valorObtenido);
+            contador++;
+        }
+        printf("\n");
+        filasMuestra++;
+    } while (feof(archivoP) == 0 &&  filasMuestra < filas);
+
+    fclose(archivoP);
+    
+    return matrizR;
+}
