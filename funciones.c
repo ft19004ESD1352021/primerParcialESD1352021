@@ -156,7 +156,7 @@ char * leer(char *Path) {
                  valorObtenido = strtok(NULL, ", ");
             }
             printf(" %s ",valorObtenido);
-            
+            /*No me guarda en tipo char */
             //*(matrizR + filasMuestra * columnas + contador) = (valorObtenido);
             contador++;
         }
