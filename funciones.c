@@ -121,7 +121,7 @@ char * retornarArchivo(char *archivo) {
         columnas = 0;
         fgets(goku, 10000, puntero);
         almacenamiento = strtok(goku, ",");
-        while (m != NULL) {
+        while (almacenamiento != NULL) {
              strcpy( *(arrays + i * c + columnas), almacenamiento);
             almacenamiento = strtok(NULL, ",");          
             columnas++;
