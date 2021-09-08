@@ -24,10 +24,17 @@ int clean_suite(void) {
 
 void testGenerarMatriz() {
     char* path = "peliculasFavoritasESD135_2021.csv";
-
+    char* paths = "peliculas";
     int* result = generarMatriz(path);
     CU_ASSERT_EQUAL(*(result + 59 * 6 + 6), 0);
     CU_ASSERT_EQUAL(*(result + 1 * 6 + 0), 1);
+    int *i = generarMatriz(paths);
+    if(i == 0){
+        CU_PASS("PASS");
+    }else if(i == 1){
+        CU_FAIL("FAIL");
+    }
+    
 }
 
 int main() {

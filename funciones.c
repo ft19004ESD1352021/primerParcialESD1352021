@@ -9,6 +9,8 @@ int * generarMatriz(char *Path) {
     archivoP = fopen(Path, "r");
     if (archivoP == 0) {
         printf("Hubo un problema en abrir el archivo");
+        return 0;
+        exit(0);
     }
     int filas = 0;
     int columnas = 0;
