@@ -3,8 +3,11 @@
 ## ESTUDIANTES
 ### FUENTES TRIGUEROS, JOEL EDUARDO 
 ### LOBATO ROMERO, CARLOS LUIS 
-## CODIGO DE PRUEBA ESTE VA EN EL MAIN (PRUEBA OPCIONAL)
- modificacion *puntero= Leer_archivo(PATH);
+## CODIGO DE PRUEBA ESTE VA EN EL MAIN (este codigo solo fue creado para pruebas)
+##En el archivo funciones.c esta dinamico
+char *PATH = "peliculasFavoritasESD135_2021.csv";
+    
+   cambio *puntero= retornarArchivo(PATH);
     
     printf("\n\n-----------------------PRIMERA FUNCION----------------------\n\n");
             
@@ -44,7 +47,7 @@
     
     printf("\n\n-----------------------CUARTA FUNCION----------------------\n\n");
     int *punte; 
-    punte = multiplyMatrices(generarMatriz(PATH), 59, 6, transponerMatrices(g, 59, 6), 6, 59);
+    punte = productoMatriz(generarMatriz(PATH), 59, 6, transponerMatrices(g, 59, 6), 6, 59);
     //punte= multiplyMatrices(&numeros[0][0], 3, 3, &numeros2[0][0], 3, 2);
 
     int q;
@@ -60,6 +63,6 @@
     }
     
     printf("\n\n-----------------------QUINTA FUNCION----------------------\n\n");
-    
+
     
     printf("%s",integrantes());
