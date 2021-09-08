@@ -99,7 +99,7 @@ char * retornarArchivo(char *archivo) {
     FILE *puntero = fopen(archivo, "r");
     if (puntero == NULL) {
         printf("Esta vacio el archivo %s\n", archivo);
-        return 0;
+        return NULL;
     }
     int f = 1,c = 1;    
     while (feof(puntero) == 0) {
