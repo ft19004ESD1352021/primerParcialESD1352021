@@ -26,7 +26,7 @@ int * generarMatriz(char *Path) {
     }
 
     rewind(archivoP);
-   
+
     int *generada = (int *) malloc(columnas * filas * sizeof (int));
     char valor[60];
     char *valorObtenido;
@@ -57,7 +57,6 @@ int * generarMatriz(char *Path) {
     fclose(archivoP);
     return generada;
 }
-
 
 /*------Transponer matriz-------*/
 int * transponerMatrices(int *matriz, int filas, int columnas) {
@@ -97,74 +96,71 @@ const char * integrantes() {
     return *grupo;
 }
 
-char * leer(char *Path) {
-   
-    FILE *archivoP;
-    archivoP = fopen(Path, "r");
-    
-    
-    if (archivoP == NULL) {
-        printf("Hubo un problema en abrir el archivo");
+char * Leer_archivo(char *nombre) {
+
+
+    FILE *fpdo = fopen(nombre, "r");
+
+
+
+    if (fpdo == NULL) {
+        printf("No hay nada en %s\n", nombre);
+        return 0;
+
     }
-    
-    int filas = 0;
-    int columnas = 0;
-    //Cuentas filas y columnas  del archivo
-    while (feof(archivoP) == 0) {
-        char letra = fgetc(archivoP);
+
+    int f = 1;
+    int c = 1;
+    while (feof(fpdo) == 0) {
+        char letra = fgetc(fpdo);
         if (letra == '\n') {
-            filas++;
-
-        } else if (filas == 0 && letra == 44) {
-            columnas++;
-
+            f++;
+        } else if (f < 2 && letra == 44) {
+            c++;
         }
     }
+
     
-    filas++;
-    columnas++;
+    rewind(fpdo);
+    int i = 0;
+    char *m;
+    char temp[10024];
 
+    char aux;
+    int columnas = 0;
 
+    //modificacion array[f][c];
 
-    rewind(archivoP);
-    
-    char *matrizR = (char *) malloc(filas * columnas * sizeof (char));
-    
-    //static char matrizR[60][7];
-    char valor[300];
-    char *valorObtenido = "";
-    char *prueba;
-    int filasMuestra = 0;
-    int contador = 0;
+    modificacion *arrays;
+    arrays = (modificacion *) malloc(f * c * sizeof (modificacion));
+    while (i < f) {
 
-    void *alma; 
-    do {
-       
+        columnas = 0;
+        fgets(temp, 10024, fpdo);
 
-        contador = 0;
+        m = strtok(temp, ",");
 
-        fgets(valor, 300, archivoP);
-
-        prueba = valor;
-        //Obtenemos las demas columnas del strtok
-        while (contador < columnas) {
-            if (contador == 0) {
-                 
-                valorObtenido = strtok(valor, ", ");
-                 
-            }else{
-                 valorObtenido = strtok(NULL, ", ");
-            }
-            printf(" %s ",valorObtenido);
-            /*No me guarda en tipo char */
-            //*(matrizR + filasMuestra * columnas + contador) = (valorObtenido);
-            contador++;
+        while (m != NULL) {
+            //strcpy(array[i][columnas], m);
+             strcpy( *(arrays + i * c + columnas), m);
+            m = strtok(NULL, ",");
+           
+            columnas++;
         }
-        printf("\n");
-        filasMuestra++;
-    } while (feof(archivoP) == 0 &&  filasMuestra < filas);
+        i++;
 
-    fclose(archivoP);
-    
-    return matrizR;
+    }
+
+    /*
+        for (int j = 0; j < f; j++) {
+            for (int x = 0; x < c; x++) {
+                printf(" %s ", array[j][x]);
+            }
+            puts("");
+        }
+     */
+
+    puts("\n");
+    fclose(fpdo);
+    return arrays;
 }
