@@ -43,11 +43,15 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 
 # Test Files
 TESTFILES= \
-	${TESTDIR}/TestFiles/f1
+	${TESTDIR}/TestFiles/f2 \
+	${TESTDIR}/TestFiles/f1 \
+	${TESTDIR}/TestFiles/f3
 
 # Test Object Files
 TESTOBJECTFILES= \
-	${TESTDIR}/tests/retornarArchivo.o
+	${TESTDIR}/tests/generarMatriz.o \
+	${TESTDIR}/tests/retornarArchivo.o \
+	${TESTDIR}/tests/transponerMatrices.o
 
 # C Compiler Flags
 CFLAGS=
@@ -90,15 +94,35 @@ ${OBJECTDIR}/main.o: main.c
 .build-tests-conf: .build-tests-subprojects .build-conf ${TESTFILES}
 .build-tests-subprojects:
 
+${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/generarMatriz.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.c} -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS}   -lcunit 
+
 ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/retornarArchivo.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.c} -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS}   -lcunit 
+
+${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/transponerMatrices.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.c} -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS}   -lcunit 
+
+
+${TESTDIR}/tests/generarMatriz.o: tests/generarMatriz.c 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/generarMatriz.o tests/generarMatriz.c
 
 
 ${TESTDIR}/tests/retornarArchivo.o: tests/retornarArchivo.c 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/retornarArchivo.o tests/retornarArchivo.c
+
+
+${TESTDIR}/tests/transponerMatrices.o: tests/transponerMatrices.c 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/transponerMatrices.o tests/transponerMatrices.c
 
 
 ${OBJECTDIR}/funciones_nomain.o: ${OBJECTDIR}/funciones.o funciones.c 
@@ -131,7 +155,9 @@ ${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.c
 .test-conf:
 	@if [ "${TEST}" = "" ]; \
 	then  \
+	    ${TESTDIR}/TestFiles/f2 || true; \
 	    ${TESTDIR}/TestFiles/f1 || true; \
+	    ${TESTDIR}/TestFiles/f3 || true; \
 	else  \
 	    ./${TEST} || true; \
 	fi
