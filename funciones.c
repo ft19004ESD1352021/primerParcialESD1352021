@@ -5,14 +5,11 @@
 
 /*------Generar matriz-------*/
 int * generarMatriz(char *Path) {
-
     FILE *archivoP;
     archivoP = fopen(Path, "r");
-
     if (archivoP == NULL) {
         printf("Hubo un problema en abrir el archivo");
     }
-
     int filas = 0;
     int columnas = 0;
     //Cuentas filas y columnas  del archivo
@@ -24,7 +21,6 @@ int * generarMatriz(char *Path) {
             columnas++;
         }
     }
-
     rewind(archivoP);
 
     int *generada = (int *) malloc(columnas * filas * sizeof (int));
@@ -42,14 +38,11 @@ int * generarMatriz(char *Path) {
         int contador = 0;
         fgets(valor, 60, archivoP);
         prueba = valor;
-
         strtok(prueba, ", ");
         //Obtenemos las demas columnas del strtok
         while (contador < columnas) {
             valorObtenido = strtok(NULL, ",");
-
             *(generada + filasM * columnas + contador) = atoi(valorObtenido);
-            //printf("%s", valorObtenido);
             contador++;
         }
         filasM++;
@@ -57,7 +50,7 @@ int * generarMatriz(char *Path) {
     fclose(archivoP);
     return generada;
 }
-
+//---------------------------------------------------------------------------------
 /*------Transponer matriz-------*/
 int * transponerMatrices(int *matriz, int filas, int columnas) {
     int *transpuesta = (int *) malloc(columnas * filas * sizeof (int));
@@ -69,8 +62,9 @@ int * transponerMatrices(int *matriz, int filas, int columnas) {
     }
     return transpuesta;
 }
-
-int *multiplyMatrices(int *primerMatriz, int pFila, int pColumna, int *segundaMatriz, int sFila, int sColumna) {
+//---------------------------------------------------------------------------------
+/*------Multiplicar matrices-------*/
+int *productoMatriz(int *primerMatriz, int pFila, int pColumna, int *segundaMatriz, int sFila, int sColumna) {
 
     if (pColumna == sFila) {
         int aux;
@@ -86,81 +80,55 @@ int *multiplyMatrices(int *primerMatriz, int pFila, int pColumna, int *segundaMa
         }
         return result;
     } else {
-        puts("Dimenciones no son correctas");
+        puts("");
         exit(0);
     }
 }
 
+//---------------------------------------------------------------------------------
+/*------Generar carnets-------*/
 const char * integrantes() {
-    const char * grupo[] = {"LR19047,FT19004"};
+    const char * grupo[] = {"CARNETS: LR19047, FT19004"};
     return *grupo;
 }
 
-char * Leer_archivo(char *nombre) {
+//---------------------------------------------------------------------------------
+/*------Retornar matriz-------*/
 
-
-    FILE *fpdo = fopen(nombre, "r");
-
-
-
-    if (fpdo == NULL) {
-        printf("No hay nada en %s\n", nombre);
+char * retornarArchivo(char *archivo) {
+    FILE *puntero = fopen(archivo, "r");
+    if (puntero == NULL) {
+        printf("Esta vacio el archivo %s\n", archivo);
         return 0;
-
     }
-
-    int f = 1;
-    int c = 1;
-    while (feof(fpdo) == 0) {
-        char letra = fgetc(fpdo);
+    int f = 1,c = 1;    
+    while (feof(puntero) == 0) {
+        char letra = fgetc(puntero);
         if (letra == '\n') {
             f++;
         } else if (f < 2 && letra == 44) {
             c++;
         }
-    }
-
-    
-    rewind(fpdo);
+    }  
+    rewind(puntero);
     int i = 0;
-    char *m;
-    char temp[10024];
-
-    char aux;
+    char *almacenamiento;
+    char goku[10000];
     int columnas = 0;
-
-    //modificacion array[f][c];
-
-    modificacion *arrays;
-    arrays = (modificacion *) malloc(f * c * sizeof (modificacion));
+    cambio *arrays;
+    arrays = (cambio *) malloc(f * c * sizeof (cambio));
     while (i < f) {
-
         columnas = 0;
-        fgets(temp, 10024, fpdo);
-
-        m = strtok(temp, ",");
-
+        fgets(goku, 10000, puntero);
+        almacenamiento = strtok(goku, ",");
         while (m != NULL) {
-            //strcpy(array[i][columnas], m);
-             strcpy( *(arrays + i * c + columnas), m);
-            m = strtok(NULL, ",");
-           
+             strcpy( *(arrays + i * c + columnas), almacenamiento);
+            almacenamiento = strtok(NULL, ",");          
             columnas++;
         }
         i++;
-
     }
-
-    /*
-        for (int j = 0; j < f; j++) {
-            for (int x = 0; x < c; x++) {
-                printf(" %s ", array[j][x]);
-            }
-            puts("");
-        }
-     */
-
     puts("\n");
-    fclose(fpdo);
+    fclose(puntero);
     return arrays;
 }
