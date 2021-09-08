@@ -56,7 +56,7 @@ TESTOBJECTFILES= \
 	${TESTDIR}/tests/transponerMatrices.o
 
 # C Compiler Flags
-CFLAGS=
+CFLAGS=-fprofile-arcs -ftest-coverage
 
 # CC Compiler Flags
 CCFLAGS=
@@ -73,11 +73,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/primerparcialesd1352021
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/proyecto1_esd
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/primerparcialesd1352021: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/proyecto1_esd: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/primerparcialesd1352021 ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/proyecto1_esd ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/funciones.o: funciones.c
 	${MKDIR} -p ${OBJECTDIR}
