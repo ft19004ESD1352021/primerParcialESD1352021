@@ -128,7 +128,7 @@ char * retornarArchivo(char *archivo) {
         }
         i++;
     }
-    puts("\n");
+    puts("");
     fclose(puntero);
     return arrays;
 }
