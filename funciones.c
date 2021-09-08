@@ -82,7 +82,7 @@ int *productoMatriz(int *primerMatriz, int pFila, int pColumna, int *segundaMatr
         }
         return result;
     } else {
-        puts("");
+        return 0;
         exit(0);
     }
 }

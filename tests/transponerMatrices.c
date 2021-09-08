@@ -29,9 +29,7 @@ void testTransponerMatrices() {
     CU_ASSERT_EQUAL(*(result + 1 *2+ 1), 5);
     CU_ASSERT_EQUAL(*(result + 0 *2+ 0), 1);
     CU_ASSERT_EQUAL(*(result + 2 *2+ 0), 3);
-    
-    
-    
+  
 }
 
 int main() {
