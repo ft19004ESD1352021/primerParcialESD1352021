@@ -10,9 +10,6 @@
 #include <CUnit/Basic.h>
 #include "../cabecera.h"
 
-/*
- * CUnit Test Suite
- */
 
 int init_suite(void) {
     return 0;
@@ -44,8 +41,6 @@ void testProductoMatriz() {
     int *result2 = productoMatriz(&matriz1[0][0], Fila, Columna, &matriz3[0][0], sila, solumna);
       if(result2 == 0){
         CU_PASS("PASS");
-    }else if(result2 == 1){
-        CU_FAIL("FAIL");
     }
     
 }
