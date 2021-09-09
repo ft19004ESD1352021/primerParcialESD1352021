@@ -90,7 +90,7 @@ int *productoMatriz(int *primerMatriz, int pFila, int pColumna, int *segundaMatr
 //---------------------------------------------------------------------------------
 /*------Generar carnets-------*/
 const char * integrantes() {
-    const char * grupo[] = {"CARNETS: LR19047, FT19004"};
+    const char * grupo[] = {"#LR19047,#FT19004"};
     return *grupo;
 }
 
