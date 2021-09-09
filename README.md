@@ -1,10 +1,13 @@
-# primerParcialESD1352021
+# primerParcialESD1352021 
 
-## ESTUDIANTES
+## Estudiantes
 ### FUENTES TRIGUEROS, JOEL EDUARDO 
 ### LOBATO ROMERO, CARLOS LUIS 
 ## CODIGO DE PRUEBA ESTE VA EN EL MAIN (este codigo solo fue creado para pruebas)
-##En el archivo funciones.c esta dinamico
+# PATH = "peliculasFavoritasESD135_2021.csv";
+## En el archivo funciones.c esta dinamico
+
+
 ‘‘‘char *PATH = "peliculasFavoritasESD135_2021.csv";
     
    cambio *puntero= retornarArchivo(PATH);
